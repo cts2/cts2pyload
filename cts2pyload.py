@@ -136,7 +136,7 @@ if __name__ == "__main__":
     parser.add_argument('-url', '-url', help='base CTS2 service URL', required=True)
     parser.add_argument('-d', '--data', help='the directory containing CTS2 XML files', required=True)
     parser.add_argument('-c', '--changeset', help='change set URI', required=False)
-    parser.add_argument('-commit', '--commit', help='commit the change set', action='store_true')
+    parser.add_argument('-commit', '--commit', help='commit the change set', action='store_true', default=True)
     parser.add_argument('-u', '--user', help='username', required=False)
     parser.add_argument('-p', '--password', help='password', required=False)
 

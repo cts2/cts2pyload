@@ -13,6 +13,7 @@ import urllib2
 import base64
 import argparse
 import os
+import codecs
 from xml.dom.minidom import parseString
 
 UPDATES_NS = 'http://schema.omg.org/spec/CTS2/1.0/Updates'
@@ -91,7 +92,11 @@ def iterate_files(path,action):
 
 
 def get_create_url(node_name):
-    return create_urls[node_name]
+    qname = node_name.split(":")
+    if(len(qname) == 1):
+      return create_urls[qname[0]]
+    else:
+      return create_urls[qname[1]]
 
 def load(url,user,password,xml_data,changeset,commit):
     '''Loads a CTS2 XML file or set of files
@@ -117,6 +122,7 @@ def load(url,user,password,xml_data,changeset,commit):
     def process_file(xml_file):
         xml_file = open(xml_file,'r')
         data = xml_file.read()
+        data = ''.join([x for x in data if ord(x) < 128])
         xml_file.close()
 
         xml_type = get_xml_type(data)
